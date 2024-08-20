@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
 public class Main {
     public static void main(String[] args) {
         List<Person> person = Arrays.asList(
@@ -30,20 +28,19 @@ public class Main {
 
         // filter
         List<Person> younger = person.stream()
-                                .filter(t -> t.age < 30)
-                                .collect(toList());
+                .filter(t -> t.age < 30).toList();
         System.out.println("Younger person in the list is: ");
         younger.forEach(x -> System.out.println("Name " + x.firstName + "-" + x.lastName));
 
 
         // map
         List<String> map = person.stream()
-                .map(x-> x.getLastName().toUpperCase())
-                .collect(toList());
+                .map(x -> x.getLastName().toUpperCase()).toList();
         map.forEach(System.out::println);
 
         // map && flatMap
         System.out.println("--------");
+        // Ex1
         List<String> words = Arrays.asList("Hello", "World");
         words.stream()
                 .map((String line) -> Arrays.stream(line.split("")))
@@ -55,6 +52,15 @@ public class Main {
                 .flatMap((String line) -> Arrays.stream(line.split(""))) //代表切除空字串，所以每切一次就讓每個字換行。
                 .distinct() // 把不一樣字母分割出來。
                 .forEach(System.out::println);
+        // Ex2
+        System.out.println("--------");
+        List<List<Integer>> nums = Arrays.asList(
+                Arrays.asList(1, 2, 3),
+                Arrays.asList(4, 5, 6));
+        List<Integer> list = nums.stream()
+                .flatMap(List::stream).toList();
+        for (Integer i:list)
+            System.out.println(i);
 
     }
 }
