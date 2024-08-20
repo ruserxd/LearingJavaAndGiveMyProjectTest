@@ -51,6 +51,7 @@ public class Main {
                 .forEach(System.out::println);
         System.out.println("--------");
         words.stream()
+                // 把他切成 "H","e","l","l","o","W","o","r","l","d"
                 .flatMap((String line) -> Arrays.stream(line.split(""))) //代表切除空字串，所以每切一次就讓每個字換行。
                 .distinct() // 把不一樣字母分割出來。
                 .forEach(System.out::println);
